@@ -8,9 +8,11 @@
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky install",
-    "test": "echo 0"
+    "test": "echo 0",
+    "type-check": "tsc"
   },
   "dependencies": {
+    "@stitches/react": "^1.2.8",
     "@types/node": "18.15.12",
     "@types/react": "18.0.37",
     "@types/react-dom": "18.0.11",
@@ -24,13 +26,13 @@
   "devDependencies": {
     "@commitlint/cli": "^17.6.1",
     "@commitlint/config-conventional": "^17.6.1",
-    "husky": "^8.0.3",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
     "@typescript-eslint/parser": "^5.59.0",
     "eslint": "^8.38.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.8.0",
+    "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-jest-dom": "^4.0.3",
     "eslint-plugin-jsx-a11y": "^6.7.1",
@@ -39,6 +41,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-unicorn": "^46.0.0",
     "eslint-plugin-unused-imports": "^2.0.0",
+    "husky": "^8.0.3",
     "prettier": "^2.8.7",
     "typescript": "^5.0.4"
   }

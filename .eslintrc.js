@@ -1,5 +1,4 @@
 const commonRules = {
-  'import/prefer-default-export': 'off',
   'unicorn/no-useless-undefined': 'off',
 
   'no-underscore-dangle': [
@@ -28,6 +27,8 @@ const commonRules = {
   'no-restricted-syntax': 'off',
   'unicorn/no-array-reduce': 'off',
   'no-param-reassign': 'off',
+  'no-restricted-exports': 'off',
+  'import/prefer-default-export': 'off',
 
   /**
    * Prettier follows double quotes by default, but the Airbnb style guide
@@ -386,9 +387,7 @@ module.exports = {
   ],
   settings: {
     'import/resolver': {
-      node: {
-        extensions: ['.ts', '.tsx', '.js', '.jsx', '.css', '.scss'],
-      },
+      typescript: {},
     },
   },
 };
