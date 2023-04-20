@@ -1,5 +1,4 @@
 const commonRules = {
-  'import/no-default-export': 'error',
   'import/prefer-default-export': 'off',
   'unicorn/no-useless-undefined': 'off',
 

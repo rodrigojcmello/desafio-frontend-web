@@ -1,4 +1,3 @@
-/* eslint-disable import/no-default-export */
 import type { AppProps } from 'next/app';
 import type { FC } from 'react';
 
