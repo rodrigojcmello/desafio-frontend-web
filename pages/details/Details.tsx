@@ -3,19 +3,30 @@ import moment from 'moment';
 import { getChecklistID } from '@/services/checklist/checklist';
 import type { GetServerSideProps } from 'next';
 import type { DetailsProps } from '@/pages/details/Details.types';
+import 'leaflet/dist/leaflet.css';
+import { Map } from '@/pages/details/components/Map';
+import type { LatLngExpression } from 'leaflet';
 
 const Details: FC<DetailsProps> = ({ farmer }) => {
-  // console.log('farmer', id, farmer);
+  // console.log('farmer', farmer);
+
+  const center: LatLngExpression = [
+    farmer.location.latitude,
+    farmer.location.longitude,
+  ];
 
   return (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    <>
+    <div>
       {farmer ? (
         // eslint-disable-next-line no-underscore-dangle
         <div key={farmer._id}>
           <div>
             <b>Current owner</b>
             <div>{farmer.from.name}</div>
+          </div>
+          <div>
+            <b>Name</b>
+            <div>{farmer.farmer.name}</div>
           </div>
           <div>
             <b>City</b>
@@ -61,9 +72,31 @@ const Details: FC<DetailsProps> = ({ farmer }) => {
               {moment(farmer.updated_at).fromNow()}
             </div>
           </div>
+
+          <Map
+            width={800}
+            height={400}
+            center={center}
+            // center={[farmer.location.latitude, farmer.location.longitude]}
+            zoom={15}
+          >
+            {({ TileLayer, Marker, Popup }) => (
+              <>
+                <TileLayer
+                  url={'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'}
+                  attribution={
+                    '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                  }
+                />
+                <Marker position={center}>
+                  <Popup>{farmer.farmer.name}</Popup>
+                </Marker>
+              </>
+            )}
+          </Map>
         </div>
       ) : undefined}
-    </>
+    </div>
   );
 };
 
