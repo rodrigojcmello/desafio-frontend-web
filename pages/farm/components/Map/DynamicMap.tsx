@@ -7,7 +7,7 @@ import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
 import iconUrl from 'leaflet/dist/images/marker-icon.png';
 import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
 
-import type { MapProps } from '@/pages/details/components/Map/Map.types';
+import type { MapProps } from '@/pages/farm/components/Map/Map.types';
 import { useEffect } from 'react';
 import styles from './Map.module.css';
 

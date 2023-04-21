@@ -8,10 +8,15 @@ const Home: FC<HomeProps> = ({ checklist }) => {
 
   return (
     <div>
+      <div>
+        <h1>Farmers</h1>
+        <Link href={`/farm/new`}>add farmer</Link>
+      </div>
+
       {checklist.map((farmer) => {
         return (
           // eslint-disable-next-line no-underscore-dangle
-          <Link href={`/details/${farmer._id}`} key={farmer._id}>
+          <Link href={`/farm/${farmer._id}`} key={farmer._id}>
             <div>{farmer.from.name}</div>
             <div>{farmer.farmer.name}</div>
             <div>{farmer.farmer.city}</div>

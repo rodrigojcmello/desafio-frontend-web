@@ -2,12 +2,12 @@ import type { FC } from 'react';
 import moment from 'moment';
 import { getChecklistID } from '@/services/checklist/checklist';
 import type { GetServerSideProps } from 'next';
-import type { DetailsProps } from '@/pages/details/Details.types';
+import type { DetailsProps } from '@/pages/farm/Farm.types';
 import 'leaflet/dist/leaflet.css';
-import { Map } from '@/pages/details/components/Map';
+import { Map } from '@/pages/farm/components/Map';
 import type { LatLngExpression } from 'leaflet';
 
-const Details: FC<DetailsProps> = ({ farmer }) => {
+const Farm: FC<DetailsProps> = ({ farmer }) => {
   // console.log('farmer', farmer);
 
   const center: LatLngExpression = [
@@ -100,7 +100,7 @@ const Details: FC<DetailsProps> = ({ farmer }) => {
   );
 };
 
-export default Details;
+export default Farm;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.query;
