@@ -1,2 +1,7 @@
-export { getChecklist } from './checklist';
-export type { CheckList } from './types';
+export {
+  getAllFarms,
+  deleteFarmByID,
+  getOneFarmByID,
+  setNewFarm,
+} from './checklist';
+export type { CheckList, Farmer } from './types';

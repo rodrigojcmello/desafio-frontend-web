@@ -1,7 +1,7 @@
 import Head from 'next/head';
 // import { Inter } from 'next/font/google';
 import type { FC } from 'react';
-import { getChecklist } from '@/services/checklist';
+import { getAllFarms } from '@/services/checklist';
 import type { HomeProps } from '@/pages/farm/list/List.types';
 import List from './farm/list';
 
@@ -28,7 +28,7 @@ const Home: FC<HomeProps> = (props) => {
 export default Home;
 
 export const getServerSideProps = async () => {
-  const checklist = await getChecklist();
+  const checklist = await getAllFarms();
 
   return {
     props: {

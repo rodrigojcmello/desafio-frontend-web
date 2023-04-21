@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { InputText } from '@/pages/farm/new/components/InputText';
 import { useForm } from 'react-hook-form';
 import type { FarmFields } from '@/pages/farm/new/NewFarm.types';
-import { setChecklist } from '@/services/checklist/checklist';
+import { setNewFarm } from '@/services/checklist';
 import { customAlphabet } from 'nanoid/async';
 import { fields } from '@/pages/farm/new/NewFarm.validation';
 
@@ -12,7 +12,7 @@ const onSubmit = async (data: FarmFields) => {
 
   const date = new Date();
 
-  await setChecklist([
+  await setNewFarm([
     {
       _id: `${id}`,
       created_at: date,

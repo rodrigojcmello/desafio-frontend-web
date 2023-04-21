@@ -1,13 +1,15 @@
 import type { FC } from 'react';
 import moment from 'moment';
-import { getChecklistID } from '@/services/checklist/checklist';
+import { deleteFarmByID, getOneFarmByID } from '@/services/checklist';
 import type { GetServerSideProps } from 'next';
-import type { ViewProps } from '@/pages/farm/view/Farm.types';
+import type { ViewProps } from '@/pages/farm/view/ViewFarm.types';
 import 'leaflet/dist/leaflet.css';
 import { Map } from '@/pages/farm/view/components/Map';
 import type { LatLngExpression } from 'leaflet';
+import { useRouter } from 'next/router';
 
-const Farm: FC<ViewProps> = ({ farmer }) => {
+const ViewFarm: FC<ViewProps> = ({ id, farmer }) => {
+  const router = useRouter();
   // console.log('farmer', farmer);
 
   const center: LatLngExpression = [
@@ -15,8 +17,22 @@ const Farm: FC<ViewProps> = ({ farmer }) => {
     farmer.location.longitude,
   ];
 
+  const deleteFarm = async () => {
+    if (window.confirm('Tem certeza que deseja apagar esta fazenda?')) {
+      await deleteFarmByID(id);
+      alert('Fazenda deletada!');
+      router.push('/');
+    }
+  };
+
   return (
     <div>
+      <div>
+        <h1>View farm</h1>
+        <button type={'button'} onClick={deleteFarm}>
+          Apagar
+        </button>
+      </div>
       {farmer ? (
         // eslint-disable-next-line no-underscore-dangle
         <div key={farmer._id}>
@@ -94,11 +110,11 @@ const Farm: FC<ViewProps> = ({ farmer }) => {
   );
 };
 
-export default Farm;
+export default ViewFarm;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.query;
-  const farmer = await getChecklistID(id as string);
+  const farmer = await getOneFarmByID(id as string);
 
   return {
     props: {
