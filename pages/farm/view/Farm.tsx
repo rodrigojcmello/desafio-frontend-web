@@ -2,12 +2,12 @@ import type { FC } from 'react';
 import moment from 'moment';
 import { getChecklistID } from '@/services/checklist/checklist';
 import type { GetServerSideProps } from 'next';
-import type { DetailsProps } from '@/pages/farm/Farm.types';
+import type { ViewProps } from '@/pages/farm/view/Farm.types';
 import 'leaflet/dist/leaflet.css';
-import { Map } from '@/pages/farm/components/Map';
+import { Map } from '@/pages/farm/view/components/Map';
 import type { LatLngExpression } from 'leaflet';
 
-const Farm: FC<DetailsProps> = ({ farmer }) => {
+const Farm: FC<ViewProps> = ({ farmer }) => {
   // console.log('farmer', farmer);
 
   const center: LatLngExpression = [
@@ -73,13 +73,7 @@ const Farm: FC<DetailsProps> = ({ farmer }) => {
             </div>
           </div>
 
-          <Map
-            width={800}
-            height={400}
-            center={center}
-            // center={[farmer.location.latitude, farmer.location.longitude]}
-            zoom={15}
-          >
+          <Map width={800} height={400} center={center} zoom={15}>
             {({ TileLayer, Marker, Popup }) => (
               <>
                 <TileLayer

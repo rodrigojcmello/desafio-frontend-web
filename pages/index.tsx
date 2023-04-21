@@ -2,12 +2,12 @@ import Head from 'next/head';
 // import { Inter } from 'next/font/google';
 import type { FC } from 'react';
 import { getChecklist } from '@/services/checklist';
-import type { HomeProps } from '@/pages/home/Home.types';
-import Home from './home';
+import type { HomeProps } from '@/pages/farm/list/List.types';
+import List from './farm/list';
 
 // const inter = Inter({ subsets: ['latin'] });
 
-const HomeRoot: FC<HomeProps> = (props) => {
+const Home: FC<HomeProps> = (props) => {
   return (
     <>
       <Head>
@@ -19,13 +19,13 @@ const HomeRoot: FC<HomeProps> = (props) => {
         <link rel={'icon'} href={'/favicon.ico'} />
       </Head>
       <main>
-        <Home {...props} />
+        <List {...props} />
       </main>
     </>
   );
 };
 
-export default HomeRoot;
+export default Home;
 
 export const getServerSideProps = async () => {
   const checklist = await getChecklist();

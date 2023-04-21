@@ -1,9 +1,9 @@
 import type { FC } from 'react';
-import type { HomeProps } from '@/pages/home/Home.types';
+import type { HomeProps } from '@/pages/farm/list/List.types';
 import moment from 'moment';
 import Link from 'next/link';
 
-const Home: FC<HomeProps> = ({ checklist }) => {
+const List: FC<HomeProps> = ({ checklist }) => {
   // console.log('checklist', checklist);
 
   return (
@@ -16,7 +16,7 @@ const Home: FC<HomeProps> = ({ checklist }) => {
       {checklist.map((farmer) => {
         return (
           // eslint-disable-next-line no-underscore-dangle
-          <Link href={`/farm/${farmer._id}`} key={farmer._id}>
+          <Link href={`/farm/view/${farmer._id}`} key={farmer._id}>
             <div>{farmer.from.name}</div>
             <div>{farmer.farmer.name}</div>
             <div>{farmer.farmer.city}</div>
@@ -32,4 +32,4 @@ const Home: FC<HomeProps> = ({ checklist }) => {
   );
 };
 
-export default Home;
+export default List;
