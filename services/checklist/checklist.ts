@@ -20,3 +20,15 @@ export const getChecklistID = async (id?: string): Promise<Farmer> => {
     return response.data;
   });
 };
+
+export const setChecklist = async (data: Farmer[]): Promise<void> => {
+  return axios({
+    method: 'post',
+    url: `${HOST}/v1/checkList`,
+    data: {
+      checklists: data,
+    },
+  }).then((response) => {
+    return response.data;
+  });
+};
