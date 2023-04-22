@@ -11,8 +11,6 @@ export const InputText: FC<InputTextProps> = ({
   defaultValue,
   valueOptions,
 }) => {
-  console.log({ id, defaultValue });
-
   return (
     <div>
       {type === 'radio' ? undefined : (

@@ -10,6 +10,7 @@ import type { Position } from '@/pages/farm/new/components/LocationMarker';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { setNewFarm, updateFarmByID } from '@/services/checklist';
+import type { LatLngExpression } from 'leaflet';
 
 const LocationMarker = dynamic(
   () => import('./components/LocationMarker').then((mod) => mod.LocationMarker),
@@ -24,6 +25,7 @@ const NewFarm: FC<EditProps> = ({ id, farmer }) => {
   const router = useRouter();
 
   const isNew = router.pathname === '/farm/new' && !id;
+  console.log('here>', isNew);
 
   const {
     formState: { errors },
@@ -47,8 +49,13 @@ const NewFarm: FC<EditProps> = ({ id, farmer }) => {
   useEffect(() => {
     if (location?.lat) {
       setValue('location', `${location?.lat}, ${location?.lng}`);
+    } else if (farmer?.location) {
+      setValue(
+        'location',
+        `${farmer?.location.latitude}, ${farmer?.location.longitude}`
+      );
     }
-  }, [location]);
+  }, [location, farmer?.location]);
 
   useEffect(() => {
     if (farmer?.type) {
@@ -107,6 +114,10 @@ const NewFarm: FC<EditProps> = ({ id, farmer }) => {
   };
 
   const title = isNew ? 'Nova Fazenda' : 'Editar Fazenda';
+  const center: LatLngExpression = isNew
+    ? // Bovcontrol geolocation
+      [36.815_586_9, -119.739_342_4]
+    : [farmer?.location.latitude!, farmer?.location.longitude!];
 
   return (
     <div>
@@ -127,13 +138,7 @@ const NewFarm: FC<EditProps> = ({ id, farmer }) => {
         ))}
         <button type={'submit'}>submit</button>
       </form>
-      <Map
-        width={800}
-        height={400}
-        // Bovcontrol geolocation
-        center={{ lat: 36.815_586_9, lng: -119.739_342_4 }}
-        zoom={15}
-      >
+      <Map width={800} height={400} center={center} zoom={15}>
         {({ TileLayer, Marker, Popup }) => (
           <>
             <TileLayer
@@ -147,6 +152,8 @@ const NewFarm: FC<EditProps> = ({ id, farmer }) => {
               Marker={Marker}
               Popup={Popup}
               setLocation={setLocation}
+              center={center}
+              isNew={isNew}
             />
           </>
         )}

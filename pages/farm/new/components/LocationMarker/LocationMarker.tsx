@@ -1,15 +1,17 @@
 /* eslint-disable unicorn/no-null */
-import { useMapEvents } from 'react-leaflet';
 import { useEffect, useState } from 'react';
 import type {
   LocationMarkerProps,
   Position,
 } from '@/pages/farm/new/components/LocationMarker';
+import { useMapEvents } from 'react-leaflet';
 
 export const LocationMarker = ({
   Marker,
   Popup,
   setLocation,
+  center,
+  isNew,
 }: LocationMarkerProps) => {
   const [currentPosition, setCurrentPosition] = useState<Position>(null);
   const [newLocation, setNewLocation] = useState<Position>(null);
@@ -28,14 +30,18 @@ export const LocationMarker = ({
   });
 
   useEffect(() => {
-    map.locate();
-  }, []);
+    if (isNew) {
+      map.locate();
+    }
+  }, [isNew]);
 
   const popupText =
     currentPosition && !newLocation ? 'Você está aqui' : 'Local da fazenda';
 
-  return currentPosition === null ? null : (
-    <Marker position={newLocation || currentPosition}>
+  const position = newLocation || currentPosition || center;
+
+  return (
+    <Marker position={position}>
       <Popup>{popupText}</Popup>
     </Marker>
   );
