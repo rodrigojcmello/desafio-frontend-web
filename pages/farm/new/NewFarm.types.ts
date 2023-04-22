@@ -2,6 +2,11 @@ import type { RegisterOptions } from 'react-hook-form/dist/types/validator';
 import type { HTMLInputTypeAttribute } from 'react';
 import type { Farmer } from '@/services/checklist';
 
+export interface EditProps {
+  farmer?: Farmer;
+  id?: string;
+}
+
 export interface FarmFields {
   amount_of_milk_produced: number;
   farmer_name: string;

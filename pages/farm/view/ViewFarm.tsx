@@ -64,7 +64,7 @@ const ViewFarm: FC<ViewProps> = ({ id, farmer }) => {
           </div>
           <div>
             <b>Had supervision</b>
-            <div>{farmer.had_supervision}</div>
+            <div>{farmer.had_supervision ? 'true' : 'false'}</div>
           </div>
           <div>
             <b>Location</b>

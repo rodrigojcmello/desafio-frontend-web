@@ -11,6 +11,8 @@ export const InputText: FC<InputTextProps> = ({
   defaultValue,
   valueOptions,
 }) => {
+  console.log({ id, defaultValue });
+
   return (
     <div>
       {type === 'radio' ? undefined : (
@@ -25,9 +27,6 @@ export const InputText: FC<InputTextProps> = ({
                 ? undefined
                 : (defaultValue as string | number)
             }
-            // defaultChecked={
-            //   type === 'checkbox' ? (defaultValue as boolean) : undefined
-            // }
             {...(id === 'location' ? { readOnly: true } : undefined)}
             {...register(id, validation)}
           />
@@ -44,6 +43,7 @@ export const InputText: FC<InputTextProps> = ({
                   type={type}
                   value={valueOption.value}
                   id={valueOption.value}
+                  defaultChecked={`${defaultValue}` === valueOption.value}
                   {...register(id)}
                 />
                 {valueOption.label}

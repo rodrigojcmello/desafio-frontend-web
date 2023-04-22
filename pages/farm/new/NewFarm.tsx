@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { useForm } from 'react-hook-form';
-import type { FarmFields } from '@/pages/farm/new/NewFarm.types';
+import type { FarmFields, EditProps } from '@/pages/farm/new/NewFarm.types';
 import { customAlphabet } from 'nanoid/async';
 import { fields } from '@/pages/farm/new/NewFarm.validation';
 import { InputText } from '@/components/InputText';
@@ -9,7 +9,7 @@ import dynamic from 'next/dynamic';
 import type { Position } from '@/pages/farm/new/components/LocationMarker';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { setNewFarm } from '@/services/checklist';
+import { setNewFarm, updateFarmByID } from '@/services/checklist';
 
 const LocationMarker = dynamic(
   () => import('./components/LocationMarker').then((mod) => mod.LocationMarker),
@@ -18,30 +18,31 @@ const LocationMarker = dynamic(
   }
 );
 
-const NewFarm: FC = () => {
+const NewFarm: FC<EditProps> = ({ id, farmer }) => {
   // eslint-disable-next-line unicorn/no-null
   const [location, setLocation] = useState<Position>(null);
   const router = useRouter();
+
+  const isNew = router.pathname === '/farm/new' && !id;
 
   const {
     formState: { errors },
     register,
     handleSubmit,
     setValue,
-    getValues,
   } = useForm<FarmFields>();
 
-  // const inputFilled = {
-  //   amount_of_milk_produced: undefined,
-  //   farmer_city: undefined,
-  //   farmer_name: undefined,
-  //   from_name: undefined,
-  //   had_supervision: undefined,
-  //   location: location?.lat ? `${location?.lat}, ${location?.lng}` : undefined,
-  //   number_of_cows_head: undefined,
-  //   to_name: undefined,
-  //   type: undefined,
-  // };
+  const inputFilled = {
+    amount_of_milk_produced: farmer?.amount_of_milk_produced,
+    farmer_city: farmer?.farmer.city,
+    farmer_name: farmer?.farmer.name,
+    from_name: farmer?.from.name,
+    had_supervision: farmer?.had_supervision,
+    number_of_cows_head: farmer?.number_of_cows_head,
+    to_name: farmer?.to.name,
+    type: farmer?.type,
+    location: location?.lat ? `${location?.lat}, ${location?.lng}` : undefined,
+  };
 
   useEffect(() => {
     if (location?.lat) {
@@ -49,9 +50,24 @@ const NewFarm: FC = () => {
     }
   }, [location]);
 
+  useEffect(() => {
+    if (farmer?.type) {
+      setValue('type', farmer.type);
+    }
+  }, [farmer?.type]);
+
+  useEffect(() => {
+    if (farmer?.had_supervision) {
+      setValue(
+        'had_supervision',
+        `${farmer.had_supervision ? 'true' : 'false'}`
+      );
+    }
+  }, [farmer?.had_supervision]);
+
   const onSubmit = async (data: FarmFields) => {
     const nanoid = customAlphabet('1234567890', 8);
-    const id = await nanoid();
+    const newId = await nanoid();
 
     const date = new Date();
 
@@ -59,43 +75,47 @@ const NewFarm: FC = () => {
 
     console.log({ data });
 
-    await setNewFarm([
-      {
-        _id: `${id}`,
-        created_at: date,
-        updated_at: date,
-        amount_of_milk_produced: Number(data.amount_of_milk_produced),
-        farmer: {
-          city: data.farmer_city,
-          name: data.farmer_name,
-        },
-        from: {
-          name: data.from_name,
-        },
-        had_supervision: data.had_supervision === 'true',
-        location: {
-          latitude: Number(lat),
-          longitude: Number(lng),
-        },
-        number_of_cows_head: Number(data.number_of_cows_head),
-        to: {
-          name: data.to_name,
-        },
-        type: data.type,
+    const payload = {
+      ...(isNew ? { _id: `${newId}` } : undefined),
+      created_at: isNew ? date : farmer?.created_at!,
+      updated_at: date,
+      amount_of_milk_produced: Number(data.amount_of_milk_produced),
+      farmer: {
+        city: data.farmer_city,
+        name: data.farmer_name,
       },
-    ]);
+      from: {
+        name: data.from_name,
+      },
+      had_supervision: data.had_supervision === 'true',
+      location: {
+        latitude: Number(lat),
+        longitude: Number(lng),
+      },
+      number_of_cows_head: Number(data.number_of_cows_head),
+      to: {
+        name: data.to_name,
+      },
+      type: data.type,
+    };
 
-    alert('Fazenda cadastrada!');
+    await (isNew ? setNewFarm([payload]) : updateFarmByID(id!, payload));
+
+    const alertMessage = isNew ? 'Fazenda cadastrada!' : 'Fazenda editada!';
+    alert(alertMessage);
     router.push('/');
   };
 
+  const title = isNew ? 'Nova Fazenda' : 'Editar Fazenda';
+
   return (
     <div>
-      <h1>New farm</h1>
+      <h1>{title}</h1>
       <form autoComplete={'off'} onSubmit={handleSubmit(onSubmit)}>
         {fields.map((field) => (
           <InputText
             key={field.id}
+            defaultValue={inputFilled[field.id as keyof FarmFields]}
             id={field.id as keyof FarmFields}
             label={field.label}
             register={register}
