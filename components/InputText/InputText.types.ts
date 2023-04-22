@@ -10,4 +10,5 @@ export interface InputTextProps {
   register: UseFormRegister<FarmFields>;
   options?: RegisterOptions;
   error?: FieldError;
+  defaultValue?: string | number | boolean;
 }

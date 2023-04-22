@@ -22,8 +22,17 @@ export const setNewFarm = async (data: Farmer[]): Promise<void> => {
   await api.post('/v1/checkList', { checklists: data });
 };
 
-export const deleteFarmByID = async (id?: string): Promise<void> => {
+export const deleteFarmByID = async (id: string): Promise<void> => {
   // TODO: handle errors
   const response = await api.delete(`/v1/checkList/${id}`);
+  return response.data;
+};
+
+export const updateFarmByID = async (
+  id: string,
+  data: Farmer
+): Promise<Farmer> => {
+  // TODO: handle errors
+  const response = await api.put(`/v1/checkList/${id}`, data);
   return response.data;
 };

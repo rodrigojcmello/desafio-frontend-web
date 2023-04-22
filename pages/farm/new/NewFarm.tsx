@@ -1,10 +1,10 @@
 import type { FC } from 'react';
-import { InputText } from '@/pages/farm/new/components/InputText';
 import { useForm } from 'react-hook-form';
 import type { FarmFields } from '@/pages/farm/new/NewFarm.types';
 import { setNewFarm } from '@/services/checklist';
 import { customAlphabet } from 'nanoid/async';
 import { fields } from '@/pages/farm/new/NewFarm.validation';
+import { InputText } from '@/components/InputText';
 
 const onSubmit = async (data: FarmFields) => {
   const nanoid = customAlphabet('1234567890', 8);

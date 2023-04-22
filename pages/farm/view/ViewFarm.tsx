@@ -7,6 +7,7 @@ import 'leaflet/dist/leaflet.css';
 import { Map } from '@/pages/farm/view/components/Map';
 import type { LatLngExpression } from 'leaflet';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const ViewFarm: FC<ViewProps> = ({ id, farmer }) => {
   const router = useRouter();
@@ -29,6 +30,8 @@ const ViewFarm: FC<ViewProps> = ({ id, farmer }) => {
     <div>
       <div>
         <h1>View farm</h1>
+        {/* eslint-disable-next-line no-underscore-dangle */}
+        <Link href={`/farm/edit/${id}`}>Editar</Link>
         <button type={'button'} onClick={deleteFarm}>
           Apagar
         </button>

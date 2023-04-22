@@ -20,4 +20,5 @@ export interface InputOptions {
   label: string;
   type: HTMLInputTypeAttribute;
   options?: RegisterOptions;
+  defaultValue?: string | number;
 }

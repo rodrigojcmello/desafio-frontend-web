@@ -10,7 +10,7 @@ export interface Farmer {
   from: { name: string };
   number_of_cows_head: number;
   location: { latitude: number; longitude: number };
-  _id: string;
+  _id?: string;
   to: { name: string };
   type: 'BPA' | 'Antibiótico' | 'BPF';
 }
