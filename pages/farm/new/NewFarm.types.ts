@@ -7,7 +7,7 @@ export interface FarmFields {
   farmer_name: string;
   farmer_city: string;
   from_name: string;
-  had_supervision: boolean;
+  had_supervision: string;
   location: string;
   number_of_cows_head: number;
   to_name: string;
@@ -18,6 +18,7 @@ export interface InputOptions {
   id: string;
   label: string;
   type: HTMLInputTypeAttribute;
-  options?: RegisterOptions;
+  validation?: RegisterOptions;
   defaultValue?: string | number;
+  valueOptions?: { label: string; value: string }[];
 }

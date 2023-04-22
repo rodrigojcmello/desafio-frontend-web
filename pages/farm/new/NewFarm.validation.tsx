@@ -5,7 +5,7 @@ export const fields: InputOptions[] = [
     id: 'amount_of_milk_produced',
     label: 'Quantidade de leite produzida no mês',
     type: 'number',
-    options: {
+    validation: {
       required: 'A quantidade de leite produzida no mês é necessária',
     },
   },
@@ -13,30 +13,35 @@ export const fields: InputOptions[] = [
     id: 'farmer_name',
     label: 'Nome da fazenda',
     type: 'text',
-    options: { required: 'O nome da fazenda é necessário' },
+    validation: { required: 'O nome da fazenda é necessário' },
   },
   {
     id: 'farmer_city',
     label: 'Cidade da fazenda',
     type: 'text',
-    options: { required: 'A cidade da fazenda é necessária' },
+    validation: { required: 'A cidade da fazenda é necessária' },
   },
   {
     id: 'from_name',
     label: 'Nome do fazendeiro',
     type: 'text',
-    options: { required: 'O nome do fazendeiro é necessário' },
+    validation: { required: 'O nome do fazendeiro é necessário' },
   },
   {
     id: 'had_supervision',
     label: 'Supervisão no mês em curso',
-    type: 'checkbox',
+    type: 'radio',
+    validation: { required: 'Selecione se há supervisão ou não' },
+    valueOptions: [
+      { value: 'true', label: 'Sim' },
+      { value: 'false', label: 'Não' },
+    ],
   },
   {
     id: 'location',
     label: 'Geolocalização',
     type: 'text',
-    options: {
+    validation: {
       required:
         'Latitude e longitude são necessárias, favor usar o mapa abaixo',
     },
@@ -45,18 +50,23 @@ export const fields: InputOptions[] = [
     id: 'number_of_cows_head',
     label: 'Quantidade de cabeça de gado',
     type: 'number',
-    options: { required: 'A quantidade de cabeça de gado é necessária' },
+    validation: { required: 'A quantidade de cabeça de gado é necessária' },
   },
   {
     id: 'to_name',
     label: 'Nome do supervisor',
     type: 'text',
-    options: { required: 'O nome do supervisor é necessário' },
+    validation: { required: 'O nome do supervisor é necessário' },
   },
   {
     id: 'type',
     label: 'Tipo',
-    type: 'text',
-    options: { required: 'O tipo é necessário' },
+    type: 'radio',
+    validation: { required: 'Selecione um tipo' },
+    valueOptions: [
+      { value: 'BPA', label: 'BPA' },
+      { value: 'Antibiótico', label: 'Antibiótico' },
+      { value: 'BPF', label: 'BPF' },
+    ],
   },
 ];

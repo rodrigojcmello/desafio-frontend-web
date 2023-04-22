@@ -28,6 +28,7 @@ const NewFarm: FC = () => {
     register,
     handleSubmit,
     setValue,
+    getValues,
   } = useForm<FarmFields>();
 
   // const inputFilled = {
@@ -71,7 +72,7 @@ const NewFarm: FC = () => {
         from: {
           name: data.from_name,
         },
-        had_supervision: data.had_supervision,
+        had_supervision: data.had_supervision === 'true',
         location: {
           latitude: Number(lat),
           longitude: Number(lng),
@@ -88,8 +89,6 @@ const NewFarm: FC = () => {
     router.push('/');
   };
 
-  console.log({ errors });
-
   return (
     <div>
       <h1>New farm</h1>
@@ -97,13 +96,13 @@ const NewFarm: FC = () => {
         {fields.map((field) => (
           <InputText
             key={field.id}
-            // defaultValue={inputFilled[field.id as keyof FarmFields]}
             id={field.id as keyof FarmFields}
             label={field.label}
             register={register}
-            options={field.options}
+            validation={field.validation}
             type={field.type}
             error={errors[field.id as keyof FarmFields]}
+            valueOptions={field.valueOptions}
           />
         ))}
         <button type={'submit'}>submit</button>

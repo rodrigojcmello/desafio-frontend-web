@@ -42,7 +42,7 @@ const EditFarm: FC<EditProps> = ({ id, farmer }) => {
       from: {
         name: data.from_name,
       },
-      had_supervision: data.had_supervision,
+      had_supervision: data.had_supervision === 'true',
       location: {
         latitude: Number(lat),
         longitude: Number(lng),
@@ -66,7 +66,7 @@ const EditFarm: FC<EditProps> = ({ id, farmer }) => {
             id={field.id as keyof FarmFields}
             label={field.label}
             register={register}
-            options={field.options}
+            validation={field.validation}
             type={field.type}
             error={errors[field.id as keyof FarmFields]}
           />
