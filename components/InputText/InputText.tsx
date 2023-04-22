@@ -23,6 +23,7 @@ export const InputText: FC<InputTextProps> = ({
           defaultChecked={
             type === 'checkbox' ? (defaultValue as boolean) : undefined
           }
+          {...(id === 'location' ? { readOnly: true } : undefined)}
           {...register(id, options)}
         />
       </label>

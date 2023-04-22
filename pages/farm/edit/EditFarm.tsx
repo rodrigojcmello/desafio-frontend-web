@@ -20,8 +20,7 @@ const EditFarm: FC<EditProps> = ({ id, farmer }) => {
     farmer_name: farmer.farmer.name,
     from_name: farmer.from.name,
     had_supervision: farmer.had_supervision,
-    location_latitude: farmer.location.latitude,
-    location_longitude: farmer.location.longitude,
+    location: `${farmer.location.latitude}, ${farmer.location.longitude}`,
     number_of_cows_head: farmer.number_of_cows_head,
     to_name: farmer.to.name,
     type: farmer.type,
@@ -30,6 +29,8 @@ const EditFarm: FC<EditProps> = ({ id, farmer }) => {
   console.log({ fields, farmer });
 
   const onSubmit = async (data: FarmFields) => {
+    const [lat, lng] = data.location.split(', ');
+
     await updateFarmByID(id, {
       created_at: farmer.created_at,
       updated_at: new Date(),
@@ -43,8 +44,8 @@ const EditFarm: FC<EditProps> = ({ id, farmer }) => {
       },
       had_supervision: data.had_supervision,
       location: {
-        latitude: Number(data.location_latitude),
-        longitude: Number(data.location_longitude),
+        latitude: Number(lat),
+        longitude: Number(lng),
       },
       number_of_cows_head: Number(data.number_of_cows_head),
       to: {

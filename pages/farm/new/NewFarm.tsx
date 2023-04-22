@@ -23,6 +23,8 @@ const onSubmit = async (data: FarmFields) => {
 
   const date = new Date();
 
+  const [lat, lng] = data.location.split(', ');
+
   await setNewFarm([
     {
       _id: `${id}`,
@@ -38,8 +40,8 @@ const onSubmit = async (data: FarmFields) => {
       },
       had_supervision: data.had_supervision,
       location: {
-        latitude: Number(data.location_latitude),
-        longitude: Number(data.location_longitude),
+        latitude: Number(lat),
+        longitude: Number(lng),
       },
       number_of_cows_head: Number(data.number_of_cows_head),
       to: {
@@ -60,7 +62,17 @@ const NewFarm: FC = () => {
     handleSubmit,
   } = useForm<FarmFields>();
 
-  console.log({ location });
+  const inputFilled = {
+    amount_of_milk_produced: undefined,
+    farmer_city: undefined,
+    farmer_name: undefined,
+    from_name: undefined,
+    had_supervision: undefined,
+    location: location?.lat ? `${location?.lat}, ${location?.lng}` : undefined,
+    number_of_cows_head: undefined,
+    to_name: undefined,
+    type: undefined,
+  };
 
   return (
     <div>
@@ -69,6 +81,7 @@ const NewFarm: FC = () => {
         {fields.map((field) => (
           <InputText
             key={field.id}
+            defaultValue={inputFilled[field.id as keyof FarmFields]}
             id={field.id as keyof FarmFields}
             label={field.label}
             register={register}

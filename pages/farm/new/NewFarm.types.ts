@@ -8,8 +8,7 @@ export interface FarmFields {
   farmer_city: string;
   from_name: string;
   had_supervision: boolean;
-  location_latitude: number;
-  location_longitude: number;
+  location: string;
   number_of_cows_head: number;
   to_name: string;
   type: Farmer['type'];

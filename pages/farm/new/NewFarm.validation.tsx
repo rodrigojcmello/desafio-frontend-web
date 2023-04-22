@@ -33,19 +33,12 @@ export const fields: InputOptions[] = [
     type: 'checkbox',
   },
   {
-    id: 'location_latitude',
-    label: 'Latitude',
-    type: 'number',
+    id: 'location',
+    label: 'Geolocalização',
+    type: 'text',
     options: {
-      required: 'Latitude e longitude são necessárias, use o mapa abaixo',
-    },
-  },
-  {
-    id: 'location_longitude',
-    label: 'Longitude',
-    type: 'number',
-    options: {
-      required: 'Latitude e longitude são necessárias, use o mapa abaixo',
+      required:
+        'Latitude e longitude são necessárias, favor usar o mapa abaixo',
     },
   },
   {
