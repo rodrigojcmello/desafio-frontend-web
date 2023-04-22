@@ -5,6 +5,15 @@ import { setNewFarm } from '@/services/checklist';
 import { customAlphabet } from 'nanoid/async';
 import { fields } from '@/pages/farm/new/NewFarm.validation';
 import { InputText } from '@/components/InputText';
+import { Map } from '@/pages/farm/view/components/Map';
+import dynamic from 'next/dynamic';
+
+const LocationMarker = dynamic(
+  () => import('./components/LocationMarker').then((mod) => mod.LocationMarker),
+  {
+    ssr: false,
+  }
+);
 
 const onSubmit = async (data: FarmFields) => {
   const nanoid = customAlphabet('1234567890', 8);
@@ -63,6 +72,25 @@ const NewFarm: FC = () => {
         ))}
         <button type={'submit'}>submit</button>
       </form>
+      <Map
+        width={800}
+        height={400}
+        center={{ lat: 36.815_586_9, lng: -119.739_342_4 }}
+        zoom={15}
+      >
+        {({ TileLayer, Marker, Popup }) => (
+          <>
+            <TileLayer
+              url={'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'}
+              attribution={
+                '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              }
+            />
+            {/* @ts-ignore */}
+            <LocationMarker Marker={Marker} Popup={Popup} />
+          </>
+        )}
+      </Map>
     </div>
   );
 };
