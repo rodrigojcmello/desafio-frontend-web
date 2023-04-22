@@ -7,6 +7,8 @@ import { fields } from '@/pages/farm/new/NewFarm.validation';
 import { InputText } from '@/components/InputText';
 import { Map } from '@/pages/farm/view/components/Map';
 import dynamic from 'next/dynamic';
+import type { Position } from '@/pages/farm/new/components/LocationMarker';
+import { useState } from 'react';
 
 const LocationMarker = dynamic(
   () => import('./components/LocationMarker').then((mod) => mod.LocationMarker),
@@ -49,11 +51,16 @@ const onSubmit = async (data: FarmFields) => {
 };
 
 const NewFarm: FC = () => {
+  // eslint-disable-next-line unicorn/no-null
+  const [location, setLocation] = useState<Position>(null);
+
   const {
     formState: { errors },
     register,
     handleSubmit,
   } = useForm<FarmFields>();
+
+  console.log({ location });
 
   return (
     <div>
@@ -75,6 +82,7 @@ const NewFarm: FC = () => {
       <Map
         width={800}
         height={400}
+        // Bovcontrol geolocation
         center={{ lat: 36.815_586_9, lng: -119.739_342_4 }}
         zoom={15}
       >
@@ -87,7 +95,11 @@ const NewFarm: FC = () => {
               }
             />
             {/* @ts-ignore */}
-            <LocationMarker Marker={Marker} Popup={Popup} />
+            <LocationMarker
+              Marker={Marker}
+              Popup={Popup}
+              setLocation={setLocation}
+            />
           </>
         )}
       </Map>

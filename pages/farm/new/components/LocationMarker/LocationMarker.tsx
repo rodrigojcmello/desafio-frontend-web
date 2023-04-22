@@ -1,10 +1,16 @@
 /* eslint-disable unicorn/no-null */
 import { useMapEvents } from 'react-leaflet';
-import type { LeafletType } from '@/pages/farm/view/components/Map/Map.types';
 import { useState } from 'react';
-import type { Position } from '@/pages/farm/new/components/LocationMarker/LocationMarker.types';
+import type {
+  LocationMarkerProps,
+  Position,
+} from '@/pages/farm/new/components/LocationMarker';
 
-export const LocationMarker = ({ Marker, Popup }: LeafletType) => {
+export const LocationMarker = ({
+  Marker,
+  Popup,
+  setLocation,
+}: LocationMarkerProps) => {
   const [currentPosition, setCurrentPosition] = useState<Position>(null);
   const [newLocation, setNewLocation] = useState<Position>(null);
 
@@ -14,18 +20,23 @@ export const LocationMarker = ({ Marker, Popup }: LeafletType) => {
         map.locate();
       } else {
         setNewLocation(latlng);
+        setLocation(latlng);
         map.flyTo(latlng, map.getZoom());
       }
     },
     locationfound({ latlng }) {
       setCurrentPosition(latlng);
+      setLocation(latlng);
       map.flyTo(latlng, map.getZoom());
     },
   });
 
+  const popupText =
+    currentPosition && !newLocation ? 'Você está aqui' : 'Local da fazenda';
+
   return currentPosition === null ? null : (
     <Marker position={newLocation || currentPosition}>
-      <Popup>You are here</Popup>
+      <Popup>{popupText}</Popup>
     </Marker>
   );
 };
