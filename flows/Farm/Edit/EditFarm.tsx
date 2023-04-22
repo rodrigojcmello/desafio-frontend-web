@@ -1,11 +1,11 @@
 import type { FC } from 'react';
 import { useForm } from 'react-hook-form';
-import type { FarmFields } from '@/pages/farm/new/NewFarm.types';
-import { fields } from '@/pages/farm/new/NewFarm.validation';
+import type { FarmFields } from '@/flows/Farm/New/NewFarm.types';
+import { fields } from '@/flows/Farm/New/NewFarm.validation';
 import { InputText } from '@/components/InputText';
 import { getOneFarmByID, updateFarmByID } from '@/services/checklist';
 import type { GetServerSideProps } from 'next';
-import type { EditProps } from '@/pages/farm/edit/EditFarm.types';
+import type { EditProps } from '@/flows/Farm/Edit/EditFarm.types';
 
 const EditFarm: FC<EditProps> = ({ id, farmer }) => {
   const {

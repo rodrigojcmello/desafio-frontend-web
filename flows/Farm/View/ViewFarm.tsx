@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import moment from 'moment';
 import { deleteFarmByID, getOneFarmByID } from '@/services/checklist';
 import type { GetServerSideProps } from 'next';
-import type { ViewProps } from '@/pages/farm/view/ViewFarm.types';
+import type { ViewProps } from '@/flows/Farm/View/ViewFarm.types';
 import 'leaflet/dist/leaflet.css';
 import type { LatLngExpression } from 'leaflet';
 import { useRouter } from 'next/router';

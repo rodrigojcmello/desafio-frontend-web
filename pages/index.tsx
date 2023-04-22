@@ -2,8 +2,8 @@ import Head from 'next/head';
 // import { Inter } from 'next/font/google';
 import type { FC } from 'react';
 import { getAllFarms } from '@/services/checklist';
-import type { HomeProps } from '@/pages/farm/list/List.types';
-import List from './farm/list';
+import type { HomeProps } from '@/flows/Farm/List/List.types';
+import List from '@/flows/Farm/List/List';
 
 // const inter = Inter({ subsets: ['latin'] });
 

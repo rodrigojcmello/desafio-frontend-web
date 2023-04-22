@@ -1,1 +1,1 @@
-export { default, getServerSideProps } from '@/pages/farm/view/ViewFarm';
+export { default, getServerSideProps } from '@/flows/Farm/View/ViewFarm';

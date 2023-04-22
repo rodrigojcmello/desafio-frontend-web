@@ -1,1 +1,1 @@
-export { default } from '@/pages/farm/new/NewFarm';
+export { default } from '@/flows/Farm/New/NewFarm';

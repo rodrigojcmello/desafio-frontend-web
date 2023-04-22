@@ -1,8 +1,8 @@
 import type { FC } from 'react';
 import { useForm } from 'react-hook-form';
-import type { FarmFields, EditProps } from '@/pages/farm/new/NewFarm.types';
+import type { FarmFields, EditProps } from '@/flows/Farm/New/NewFarm.types';
 import { customAlphabet } from 'nanoid/async';
-import { fields } from '@/pages/farm/new/NewFarm.validation';
+import { fields } from '@/flows/Farm/New/NewFarm.validation';
 import { InputText } from '@/components/InputText';
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';

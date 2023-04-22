@@ -1,2 +1,2 @@
-export { getServerSideProps } from '@/pages/farm/edit/EditFarm';
-export { default } from '@/pages/farm/new/NewFarm';
+export { getServerSideProps } from '@/flows/Farm/Edit/EditFarm';
+export { default } from '@/flows/Farm/New/NewFarm';

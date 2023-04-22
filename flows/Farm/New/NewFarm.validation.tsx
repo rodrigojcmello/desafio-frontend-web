@@ -1,4 +1,4 @@
-import type { InputOptions } from '@/pages/farm/new/NewFarm.types';
+import type { InputOptions } from '@/flows/Farm/New/NewFarm.types';
 
 export const fields: InputOptions[] = [
   {

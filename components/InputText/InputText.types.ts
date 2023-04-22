@@ -1,5 +1,5 @@
 import type { FieldError, UseFormRegister } from 'react-hook-form';
-import type { FarmFields, InputOptions } from '@/pages/farm/new/NewFarm.types';
+import type { FarmFields, InputOptions } from '@/flows/Farm/New/NewFarm.types';
 import type { RegisterOptions } from 'react-hook-form/dist/types/validator';
 import type { HTMLInputTypeAttribute } from 'react';
 

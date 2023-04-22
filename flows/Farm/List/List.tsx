@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import type { HomeProps } from '@/pages/farm/list/List.types';
+import type { HomeProps } from '@/flows/Farm/List/List.types';
 import moment from 'moment';
 import Link from 'next/link';
 
