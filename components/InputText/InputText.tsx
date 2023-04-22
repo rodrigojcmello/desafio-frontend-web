@@ -17,6 +17,7 @@ export const InputText: FC<InputTextProps> = ({
         <input
           type={type}
           id={id}
+          autoComplete={'off'}
           defaultValue={
             type === 'checkbox' ? undefined : (defaultValue as string | number)
           }

@@ -1,14 +1,15 @@
 import type { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import type { FarmFields } from '@/pages/farm/new/NewFarm.types';
-import { setNewFarm } from '@/services/checklist';
 import { customAlphabet } from 'nanoid/async';
 import { fields } from '@/pages/farm/new/NewFarm.validation';
 import { InputText } from '@/components/InputText';
 import { Map } from '@/pages/farm/view/components/Map';
 import dynamic from 'next/dynamic';
 import type { Position } from '@/pages/farm/new/components/LocationMarker';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { setNewFarm } from '@/services/checklist';
 
 const LocationMarker = dynamic(
   () => import('./components/LocationMarker').then((mod) => mod.LocationMarker),
@@ -17,71 +18,84 @@ const LocationMarker = dynamic(
   }
 );
 
-const onSubmit = async (data: FarmFields) => {
-  const nanoid = customAlphabet('1234567890', 8);
-  const id = await nanoid();
-
-  const date = new Date();
-
-  const [lat, lng] = data.location.split(', ');
-
-  await setNewFarm([
-    {
-      _id: `${id}`,
-      created_at: date,
-      updated_at: date,
-      amount_of_milk_produced: Number(data.amount_of_milk_produced),
-      farmer: {
-        city: data.farmer_city,
-        name: data.farmer_name,
-      },
-      from: {
-        name: data.from_name,
-      },
-      had_supervision: data.had_supervision,
-      location: {
-        latitude: Number(lat),
-        longitude: Number(lng),
-      },
-      number_of_cows_head: Number(data.number_of_cows_head),
-      to: {
-        name: data.to_name,
-      },
-      type: data.type,
-    },
-  ]);
-};
-
 const NewFarm: FC = () => {
   // eslint-disable-next-line unicorn/no-null
   const [location, setLocation] = useState<Position>(null);
+  const router = useRouter();
 
   const {
     formState: { errors },
     register,
     handleSubmit,
+    setValue,
   } = useForm<FarmFields>();
 
-  const inputFilled = {
-    amount_of_milk_produced: undefined,
-    farmer_city: undefined,
-    farmer_name: undefined,
-    from_name: undefined,
-    had_supervision: undefined,
-    location: location?.lat ? `${location?.lat}, ${location?.lng}` : undefined,
-    number_of_cows_head: undefined,
-    to_name: undefined,
-    type: undefined,
+  // const inputFilled = {
+  //   amount_of_milk_produced: undefined,
+  //   farmer_city: undefined,
+  //   farmer_name: undefined,
+  //   from_name: undefined,
+  //   had_supervision: undefined,
+  //   location: location?.lat ? `${location?.lat}, ${location?.lng}` : undefined,
+  //   number_of_cows_head: undefined,
+  //   to_name: undefined,
+  //   type: undefined,
+  // };
+
+  useEffect(() => {
+    setValue('location', `${location?.lat}, ${location?.lng}`);
+  }, [location]);
+
+  const onSubmit = async (data: FarmFields) => {
+    const nanoid = customAlphabet('1234567890', 8);
+    const id = await nanoid();
+
+    const date = new Date();
+
+    const [lat, lng] = data.location.split(', ');
+
+    console.log({ data });
+
+    await setNewFarm([
+      {
+        _id: `${id}`,
+        created_at: date,
+        updated_at: date,
+        amount_of_milk_produced: Number(data.amount_of_milk_produced),
+        farmer: {
+          city: data.farmer_city,
+          name: data.farmer_name,
+        },
+        from: {
+          name: data.from_name,
+        },
+        had_supervision: data.had_supervision,
+        location: {
+          latitude: Number(lat),
+          longitude: Number(lng),
+        },
+        number_of_cows_head: Number(data.number_of_cows_head),
+        to: {
+          name: data.to_name,
+        },
+        type: data.type,
+      },
+    ]);
+
+    alert('Fazenda cadastrada!');
+    router.push('/');
   };
+
+  console.log({ errors });
 
   return (
     <div>
       <h1>New farm</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form autoComplete={'off'} onSubmit={handleSubmit(onSubmit)}>
         {fields.map((field) => (
           <InputText
             key={field.id}
-            defaultValue={inputFilled[field.id as keyof FarmFields]}
+            // defaultValue={inputFilled[field.id as keyof FarmFields]}
             id={field.id as keyof FarmFields}
             label={field.label}
             register={register}
