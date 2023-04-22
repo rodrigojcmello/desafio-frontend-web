@@ -43,7 +43,9 @@ const NewFarm: FC = () => {
   // };
 
   useEffect(() => {
-    setValue('location', `${location?.lat}, ${location?.lng}`);
+    if (location?.lat) {
+      setValue('location', `${location?.lat}, ${location?.lng}`);
+    }
   }, [location]);
 
   const onSubmit = async (data: FarmFields) => {
