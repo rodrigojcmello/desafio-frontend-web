@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/no-null */
 import { useMapEvents } from 'react-leaflet';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type {
   LocationMarkerProps,
   Position,
@@ -16,13 +16,9 @@ export const LocationMarker = ({
 
   const map = useMapEvents({
     click({ latlng }) {
-      if (currentPosition === null) {
-        map.locate();
-      } else {
-        setNewLocation(latlng);
-        setLocation(latlng);
-        map.flyTo(latlng, map.getZoom());
-      }
+      setNewLocation(latlng);
+      setLocation(latlng);
+      map.flyTo(latlng, map.getZoom());
     },
     locationfound({ latlng }) {
       setCurrentPosition(latlng);
@@ -30,6 +26,10 @@ export const LocationMarker = ({
       map.flyTo(latlng, map.getZoom());
     },
   });
+
+  useEffect(() => {
+    map.locate();
+  }, []);
 
   const popupText =
     currentPosition && !newLocation ? 'Você está aqui' : 'Local da fazenda';
