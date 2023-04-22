@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import type {
   LocationMarkerProps,
   Position,
-} from '@/pages/farm/new/components/LocationMarker';
+} from '@/components/LocationMarker/index';
 import { useMapEvents } from 'react-leaflet';
 
 export const LocationMarker = ({

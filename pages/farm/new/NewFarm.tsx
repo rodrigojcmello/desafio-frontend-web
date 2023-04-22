@@ -4,16 +4,16 @@ import type { FarmFields, EditProps } from '@/pages/farm/new/NewFarm.types';
 import { customAlphabet } from 'nanoid/async';
 import { fields } from '@/pages/farm/new/NewFarm.validation';
 import { InputText } from '@/components/InputText';
-import { Map } from '@/pages/farm/view/components/Map';
 import dynamic from 'next/dynamic';
-import type { Position } from '@/pages/farm/new/components/LocationMarker';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { setNewFarm, updateFarmByID } from '@/services/checklist';
 import type { LatLngExpression } from 'leaflet';
+import { Map } from '@/components/Map';
+import type { Position } from '@/components/LocationMarker';
 
 const LocationMarker = dynamic(
-  () => import('./components/LocationMarker').then((mod) => mod.LocationMarker),
+  () => import('@/components/LocationMarker').then((mod) => mod.LocationMarker),
   {
     ssr: false,
   }

@@ -6,9 +6,9 @@ import 'leaflet/dist/leaflet.css';
 import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
 import iconUrl from 'leaflet/dist/images/marker-icon.png';
 import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
-import type { MapProps } from '@/pages/farm/view/components/Map/Map.types';
+import type { MapProps } from '@/components/Map/Map.types';
 import { useEffect } from 'react';
-import styles from './Map.module.css';
+import styles from '@/components/Map/Map.module.css';
 
 const { MapContainer } = ReactLeaflet;
 

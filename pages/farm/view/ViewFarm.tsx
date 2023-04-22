@@ -4,10 +4,10 @@ import { deleteFarmByID, getOneFarmByID } from '@/services/checklist';
 import type { GetServerSideProps } from 'next';
 import type { ViewProps } from '@/pages/farm/view/ViewFarm.types';
 import 'leaflet/dist/leaflet.css';
-import { Map } from '@/pages/farm/view/components/Map';
 import type { LatLngExpression } from 'leaflet';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { Map } from '@/components/Map';
 
 const ViewFarm: FC<ViewProps> = ({ id, farmer }) => {
   const router = useRouter();

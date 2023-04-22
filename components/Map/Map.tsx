@@ -1,9 +1,9 @@
 import type { FC } from 'react';
-import type { MapProps } from '@/pages/farm/view/components/Map/Map.types';
+import type { MapProps } from '@/components/Map/Map.types';
 import dynamic from 'next/dynamic';
 
 const DynamicMap = dynamic<MapProps>(
-  () => import('./DynamicMap').then((mod) => mod.DynamicMap),
+  () => import('@/components/Map/DynamicMap').then((mod) => mod.DynamicMap),
   {
     ssr: false,
   }
