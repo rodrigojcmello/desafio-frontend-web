@@ -1,5 +1,4 @@
 import type { FC } from 'react';
-import moment from 'moment';
 import { deleteFarmByID, getOneFarmByID } from '@/services/checklist';
 import type { GetServerSideProps } from 'next';
 import type { ViewProps } from '@/flows/Farm/View/ViewFarm.types';
@@ -11,6 +10,8 @@ import { Header } from '@/components/Header';
 import { BackButton } from '@/components/BackButton';
 import { EditButton } from '@/flows/Farm/New/components/EditButton';
 import { DeleteButton } from '@/flows/Farm/New/components/DeleteButton';
+import { Item } from '@/flows/Farm/View/components/Item';
+import Head from 'next/head';
 
 const ViewFarm: FC<ViewProps> = ({ id, farmer }) => {
   const router = useRouter();
@@ -29,10 +30,15 @@ const ViewFarm: FC<ViewProps> = ({ id, farmer }) => {
     }
   };
 
+  const title = 'Detalhes da Fazenda';
+
   return (
     <div>
+      <Head>
+        <title>{title}</title>
+      </Head>
       <Header
-        title={'Detalhes da Fazenda'}
+        title={title}
         leftComponent={<BackButton />}
         rightComponent={
           <>
@@ -42,61 +48,8 @@ const ViewFarm: FC<ViewProps> = ({ id, farmer }) => {
         }
       />
       {farmer ? (
-        // eslint-disable-next-line no-underscore-dangle
-        <div key={farmer._id}>
-          <div>
-            <b>Current owner</b>
-            <div>{farmer.from.name}</div>
-          </div>
-          <div>
-            <b>Name</b>
-            <div>{farmer.farmer.name}</div>
-          </div>
-          <div>
-            <b>City</b>
-            <div>{farmer.farmer.city}</div>
-          </div>
-          <div>
-            <b>Created at</b>
-            <div>
-              {moment(farmer.created_at).format('DD/MM/YYYY')}{' '}
-              {moment(farmer.created_at).fromNow()}
-            </div>
-          </div>
-          <div>
-            <b>Amount of milk</b>
-            <div>{farmer.amount_of_milk_produced}</div>
-          </div>
-          <div>
-            <b>Had supervision</b>
-            <div>{farmer.had_supervision ? 'true' : 'false'}</div>
-          </div>
-          <div>
-            <b>Location</b>
-            <div>
-              lat: {farmer.location.latitude} long: {farmer.location.longitude}
-            </div>
-          </div>
-          <div>
-            <b>Cows head</b>
-            <div>{farmer.number_of_cows_head}</div>
-          </div>
-          <div>
-            <b>Next owner</b>
-            <div>{farmer.to.name}</div>
-          </div>
-          <div>
-            <b>Type</b>
-            <div>{farmer.type}</div>
-          </div>
-          <div>
-            <b>last update</b>
-            <div>
-              {moment(farmer.updated_at).format('DD/MM/YYYY')}{' '}
-              {moment(farmer.updated_at).fromNow()}
-            </div>
-          </div>
-
+        <div>
+          <Item farmer={farmer} />
           <Map center={center} zoom={15}>
             {({ TileLayer, Marker, Popup }) => (
               <>
