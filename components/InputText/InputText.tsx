@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 import type { InputTextProps } from '@/components/InputText';
+import { InputTextStyle } from '@/components/InputText/InputText.style';
 
 export const InputText: FC<InputTextProps> = ({
   id,
@@ -12,14 +13,15 @@ export const InputText: FC<InputTextProps> = ({
   valueOptions,
 }) => {
   return (
-    <div>
+    <InputTextStyle>
       {type === 'radio' ? undefined : (
         <label htmlFor={id}>
-          {label}
+          <span className={'input_label'}>{label}</span>
           <input
             type={type}
             id={id}
             autoComplete={'off'}
+            className={'input_text'}
             defaultValue={
               type === 'checkbox'
                 ? undefined
@@ -33,12 +35,13 @@ export const InputText: FC<InputTextProps> = ({
       {type === 'radio' && valueOptions ? (
         <>
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-          <label>{label}</label>
+          <span className={'input_label'}>{label}</span>
           {valueOptions.map((valueOption) => {
             return (
               <label htmlFor={valueOption.value} key={valueOption.value}>
                 <input
                   type={type}
+                  className={'input_radio'}
                   value={valueOption.value}
                   id={valueOption.value}
                   defaultChecked={`${defaultValue}` === valueOption.value}
@@ -50,7 +53,7 @@ export const InputText: FC<InputTextProps> = ({
           })}
         </>
       ) : undefined}
-      {error && <p>{error.message}</p>}
-    </div>
+      {error && <p className={'input__error'}>{error.message}</p>}
+    </InputTextStyle>
   );
 };

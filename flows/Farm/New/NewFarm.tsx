@@ -14,6 +14,7 @@ import type { Position } from '@/components/LocationMarker';
 import { Header } from '@/components/Header';
 import Head from 'next/head';
 import { BackButton } from '@/components/BackButton';
+import { InputTextStyle } from '@/flows/Farm/New/components/Form/Form.style';
 
 const LocationMarker = dynamic(
   () => import('@/components/LocationMarker').then((mod) => mod.LocationMarker),
@@ -128,7 +129,7 @@ const NewFarm: FC<EditProps> = ({ id, farmer }) => {
         <title>Nova Fazenda</title>
       </Head>
       <Header title={title} leftComponent={<BackButton />} />
-      <form autoComplete={'off'} onSubmit={handleSubmit(onSubmit)}>
+      <InputTextStyle autoComplete={'off'} onSubmit={handleSubmit(onSubmit)}>
         {fields.map((field) => (
           <InputText
             key={field.id}
@@ -143,7 +144,7 @@ const NewFarm: FC<EditProps> = ({ id, farmer }) => {
           />
         ))}
         <button type={'submit'}>submit</button>
-      </form>
+      </InputTextStyle>
       <Map width={800} height={400} center={center} zoom={15}>
         {({ TileLayer, Marker, Popup }) => (
           <>
