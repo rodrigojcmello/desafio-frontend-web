@@ -9,6 +9,9 @@ const globalStyles = globalCss({
     fontFamily:
       'Inter var,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji',
   },
+  '.material-symbols-outlined': {
+    fontVariationSettings: "'FILL' 0, 'wght' 700, 'GRAD' 0, 'opsz' 48",
+  },
 });
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {

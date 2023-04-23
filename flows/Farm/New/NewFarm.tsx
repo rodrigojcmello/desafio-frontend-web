@@ -12,6 +12,8 @@ import type { LatLngExpression } from 'leaflet';
 import { Map } from '@/components/Map';
 import type { Position } from '@/components/LocationMarker';
 import { Header } from '@/components/Header';
+import Head from 'next/head';
+import { BackButton } from '@/components/BackButton';
 
 const LocationMarker = dynamic(
   () => import('@/components/LocationMarker').then((mod) => mod.LocationMarker),
@@ -122,7 +124,10 @@ const NewFarm: FC<EditProps> = ({ id, farmer }) => {
 
   return (
     <div>
-      <Header title={title} />
+      <Head>
+        <title>Nova Fazenda</title>
+      </Head>
+      <Header title={title} leftComponent={<BackButton />} />
       <form autoComplete={'off'} onSubmit={handleSubmit(onSubmit)}>
         {fields.map((field) => (
           <InputText

@@ -13,6 +13,7 @@ export const { styled, css } = createStitches({
   },
   theme: {
     colors: {
+      black1000: '#000000',
       blue500: '#2196f3',
     },
     transitions: {
