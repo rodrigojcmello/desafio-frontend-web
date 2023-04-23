@@ -6,11 +6,11 @@ import type { ViewProps } from '@/flows/Farm/View/ViewFarm.types';
 import 'leaflet/dist/leaflet.css';
 import type { LatLngExpression } from 'leaflet';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { Map } from '@/components/Map';
 import { Header } from '@/components/Header';
 import { BackButton } from '@/components/BackButton';
 import { EditButton } from '@/flows/Farm/New/components/EditButton';
+import { DeleteButton } from '@/flows/Farm/New/components/DeleteButton';
 
 const ViewFarm: FC<ViewProps> = ({ id, farmer }) => {
   const router = useRouter();
@@ -34,16 +34,13 @@ const ViewFarm: FC<ViewProps> = ({ id, farmer }) => {
       <Header
         title={'Detalhes da Fazenda'}
         leftComponent={<BackButton />}
-        rightComponent={<EditButton id={id} />}
+        rightComponent={
+          <>
+            <EditButton id={id} />
+            <DeleteButton onClick={deleteFarm} />
+          </>
+        }
       />
-      <div>
-        <h1>View farm</h1>
-        {/* eslint-disable-next-line no-underscore-dangle */}
-        <Link href={`/farm/edit/${id}`}>Editar</Link>
-        <button type={'button'} onClick={deleteFarm}>
-          Apagar
-        </button>
-      </div>
       {farmer ? (
         // eslint-disable-next-line no-underscore-dangle
         <div key={farmer._id}>
