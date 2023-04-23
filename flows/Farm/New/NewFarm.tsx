@@ -11,6 +11,7 @@ import { setNewFarm, updateFarmByID } from '@/services/checklist';
 import type { LatLngExpression } from 'leaflet';
 import { Map } from '@/components/Map';
 import type { Position } from '@/components/LocationMarker';
+import { Header } from '@/components/Header';
 
 const LocationMarker = dynamic(
   () => import('@/components/LocationMarker').then((mod) => mod.LocationMarker),
@@ -121,7 +122,7 @@ const NewFarm: FC<EditProps> = ({ id, farmer }) => {
 
   return (
     <div>
-      <h1>{title}</h1>
+      <Header title={title} />
       <form autoComplete={'off'} onSubmit={handleSubmit(onSubmit)}>
         {fields.map((field) => (
           <InputText
