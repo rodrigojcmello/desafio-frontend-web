@@ -87,8 +87,6 @@ const NewFarm: FC<EditProps> = ({ id, farmer }) => {
 
     const [lat, lng] = data.location.split(', ');
 
-    console.log({ data });
-
     const payload = {
       ...(isNew ? { _id: `${newId}` } : undefined),
       created_at: isNew ? date : farmer?.created_at!,
@@ -116,8 +114,9 @@ const NewFarm: FC<EditProps> = ({ id, farmer }) => {
     await (isNew ? setNewFarm([payload]) : updateFarmByID(id!, payload));
 
     const alertMessage = isNew ? 'Fazenda cadastrada!' : 'Fazenda editada!';
+    // eslint-disable-next-line no-alert
     alert(alertMessage);
-    router.push('/');
+    await router.push('/');
   };
 
   const title = isNew ? 'Nova Fazenda' : 'Editar Fazenda';
@@ -125,8 +124,6 @@ const NewFarm: FC<EditProps> = ({ id, farmer }) => {
     ? // Bovcontrol geolocation
       [36.815_586_9, -119.739_342_4]
     : [farmer?.location.latitude!, farmer?.location.longitude!];
-
-  console.log({ errors });
 
   return (
     <div>

@@ -26,8 +26,6 @@ const EditFarm: FC<EditProps> = ({ id, farmer }) => {
     type: farmer.type,
   };
 
-  console.log({ fields, farmer });
-
   const onSubmit = async (data: FarmFields) => {
     const [lat, lng] = data.location.split(', ');
 

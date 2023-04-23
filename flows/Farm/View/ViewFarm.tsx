@@ -15,7 +15,6 @@ import Head from 'next/head';
 
 const ViewFarm: FC<ViewProps> = ({ id, farmer }) => {
   const router = useRouter();
-  // console.log('farmer', farmer);
 
   const center: LatLngExpression = [
     farmer.location.latitude,
@@ -23,10 +22,12 @@ const ViewFarm: FC<ViewProps> = ({ id, farmer }) => {
   ];
 
   const deleteFarm = async () => {
+    // eslint-disable-next-line no-alert
     if (window.confirm('Tem certeza que deseja apagar esta fazenda?')) {
       await deleteFarmByID(id);
+      // eslint-disable-next-line no-alert
       alert('Fazenda deletada!');
-      router.push('/');
+      await router.push('/');
     }
   };
 
