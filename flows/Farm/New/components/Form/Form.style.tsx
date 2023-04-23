@@ -1,7 +1,12 @@
 import { styled } from '@stitches/react';
 
-export const InputTextStyle = styled('form', {
+export const FormStyle = styled('form', {
   width: '100%',
-  maxWidth: 400,
-  margin: '16px auto',
+  maxWidth: 450,
+  margin: '0 auto',
+});
+
+export const FormWrapStyle = styled('span', {
+  margin: 16,
+  display: 'block',
 });

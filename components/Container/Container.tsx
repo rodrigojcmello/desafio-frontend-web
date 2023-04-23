@@ -3,11 +3,9 @@ import { styled } from '@/components/theme';
 
 export const ContainerBase = styled('div', {
   backgroundColor: '#FFF',
-  height: '100vh',
   transition: `height $tDefault`,
   '@bp3': {
     borderRadius: '16px',
-    height: 'calc(100vh - 32px)',
   },
   '@bp5': {
     margin: '0 auto',

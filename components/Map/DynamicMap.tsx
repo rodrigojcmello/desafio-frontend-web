@@ -8,23 +8,10 @@ import iconUrl from 'leaflet/dist/images/marker-icon.png';
 import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
 import type { MapProps } from '@/components/Map/Map.types';
 import { useEffect } from 'react';
-import styles from '@/components/Map/Map.module.css';
 
 const { MapContainer } = ReactLeaflet;
 
-export const DynamicMap: FC<MapProps> = ({
-  children,
-  className,
-  width,
-  height,
-  ...rest
-}) => {
-  let mapClassName = styles.map;
-
-  if (className) {
-    mapClassName = `${mapClassName} ${className}`;
-  }
-
+export const DynamicMap: FC<MapProps> = ({ children, ...rest }) => {
   useEffect(() => {
     (async function init() {
       // eslint-disable-next-line no-underscore-dangle,@typescript-eslint/no-explicit-any
@@ -38,7 +25,7 @@ export const DynamicMap: FC<MapProps> = ({
   }, []);
 
   return (
-    <MapContainer className={mapClassName} {...rest}>
+    <MapContainer className={'map__container'} {...rest}>
       {typeof children === 'function' ? children(ReactLeaflet) : children}
     </MapContainer>
   );

@@ -14,7 +14,10 @@ import type { Position } from '@/components/LocationMarker';
 import { Header } from '@/components/Header';
 import Head from 'next/head';
 import { BackButton } from '@/components/BackButton';
-import { InputTextStyle } from '@/flows/Farm/New/components/Form/Form.style';
+import {
+  FormStyle,
+  FormWrapStyle,
+} from '@/flows/Farm/New/components/Form/Form.style';
 import { SaveButton } from '@/flows/Farm/New/components/SaveButton';
 
 const LocationMarker = dynamic(
@@ -135,25 +138,27 @@ const NewFarm: FC<EditProps> = ({ id, farmer }) => {
         leftComponent={<BackButton />}
         rightComponent={<SaveButton onClick={handleSubmit(onSubmit)} />}
       />
-      <InputTextStyle autoComplete={'off'} onSubmit={handleSubmit(onSubmit)}>
-        {fields.map((field) => (
-          <InputText
-            key={field.id}
-            defaultValue={inputFilled[field.id as keyof FarmFields]}
-            id={field.id as keyof FarmFields}
-            label={field.label}
-            register={register}
-            validation={field.validation}
-            type={field.type}
-            error={errors[field.id as keyof FarmFields]}
-            valueOptions={field.valueOptions}
-          />
-        ))}
-        <button type={'submit'} style={{ display: 'none' }}>
-          submit
-        </button>
-      </InputTextStyle>
-      <Map width={800} height={400} center={center} zoom={15}>
+      <FormStyle autoComplete={'off'} onSubmit={handleSubmit(onSubmit)}>
+        <FormWrapStyle>
+          {fields.map((field) => (
+            <InputText
+              key={field.id}
+              defaultValue={inputFilled[field.id as keyof FarmFields]}
+              id={field.id as keyof FarmFields}
+              label={field.label}
+              register={register}
+              validation={field.validation}
+              type={field.type}
+              error={errors[field.id as keyof FarmFields]}
+              valueOptions={field.valueOptions}
+            />
+          ))}
+          <button type={'submit'} style={{ display: 'none' }}>
+            submit
+          </button>
+        </FormWrapStyle>
+      </FormStyle>
+      <Map center={center} zoom={15}>
         {({ TileLayer, Marker, Popup }) => (
           <>
             <TileLayer

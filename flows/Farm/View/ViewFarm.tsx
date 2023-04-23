@@ -97,7 +97,7 @@ const ViewFarm: FC<ViewProps> = ({ id, farmer }) => {
             </div>
           </div>
 
-          <Map width={800} height={400} center={center} zoom={15}>
+          <Map center={center} zoom={15}>
             {({ TileLayer, Marker, Popup }) => (
               <>
                 <TileLayer

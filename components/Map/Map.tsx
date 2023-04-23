@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import type { MapProps } from '@/components/Map/Map.types';
 import dynamic from 'next/dynamic';
+import { MapStyle } from '@/components/Map/Map.style';
 
 const DynamicMap = dynamic<MapProps>(
   () => import('@/components/Map/DynamicMap').then((mod) => mod.DynamicMap),
@@ -9,14 +10,10 @@ const DynamicMap = dynamic<MapProps>(
   }
 );
 
-const DEFAULT_WIDTH = 600;
-const DEFAULT_HEIGHT = 600;
-
 export const Map: FC<MapProps> = (props) => {
-  const { width = DEFAULT_WIDTH, height = DEFAULT_HEIGHT } = props;
   return (
-    <div style={{ aspectRatio: width / height }}>
+    <MapStyle>
       <DynamicMap {...props} />
-    </div>
+    </MapStyle>
   );
 };
