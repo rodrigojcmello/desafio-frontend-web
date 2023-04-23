@@ -6,7 +6,10 @@ export const MapStyle = styled('div', {
     aspectRatio: 2,
   },
   '& > div': {
-    borderRadius: '0px 0px 16px 16px',
+    borderRadius: '0',
+    '@bp3': {
+      borderRadius: '0px 0px 16px 16px',
+    },
   },
   '.map__container': {
     width: '100%',
