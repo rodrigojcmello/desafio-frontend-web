@@ -9,7 +9,7 @@
     "lint": "next lint",
     "prepare": "husky install",
     "test": "echo 0",
-    "type-check": "tsc"
+    "type-check": "tsc && npm run lint"
   },
   "dependencies": {
     "@stitches/react": "^1.2.8",
