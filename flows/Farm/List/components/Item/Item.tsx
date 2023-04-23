@@ -12,7 +12,7 @@ export const Item: FC<ItemProps> = ({ checklist }) => {
     <ItemStyle>
       {checklist.map((farmer) => {
         return (
-          <li>
+          <li key={farmer._id}>
             <Link
               className={'item__link'}
               href={`/farm/view/${farmer._id}`}
