@@ -9,3 +9,7 @@ export const DeleteIcon = () => (
 export const EditIcon = () => (
   <span className={'material-symbols-outlined'}>edit</span>
 );
+
+export const SaveIcon = () => (
+  <span className={'material-symbols-outlined'}>save</span>
+);

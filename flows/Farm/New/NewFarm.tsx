@@ -15,6 +15,7 @@ import { Header } from '@/components/Header';
 import Head from 'next/head';
 import { BackButton } from '@/components/BackButton';
 import { InputTextStyle } from '@/flows/Farm/New/components/Form/Form.style';
+import { SaveButton } from '@/flows/Farm/New/components/SaveButton';
 
 const LocationMarker = dynamic(
   () => import('@/components/LocationMarker').then((mod) => mod.LocationMarker),
@@ -29,7 +30,6 @@ const NewFarm: FC<EditProps> = ({ id, farmer }) => {
   const router = useRouter();
 
   const isNew = router.pathname === '/farm/new' && !id;
-  console.log('here>', isNew);
 
   const {
     formState: { errors },
@@ -123,12 +123,18 @@ const NewFarm: FC<EditProps> = ({ id, farmer }) => {
       [36.815_586_9, -119.739_342_4]
     : [farmer?.location.latitude!, farmer?.location.longitude!];
 
+  console.log({ errors });
+
   return (
     <div>
       <Head>
-        <title>Nova Fazenda</title>
+        <title>{title}</title>
       </Head>
-      <Header title={title} leftComponent={<BackButton />} />
+      <Header
+        title={title}
+        leftComponent={<BackButton />}
+        rightComponent={<SaveButton onClick={handleSubmit(onSubmit)} />}
+      />
       <InputTextStyle autoComplete={'off'} onSubmit={handleSubmit(onSubmit)}>
         {fields.map((field) => (
           <InputText
@@ -143,7 +149,9 @@ const NewFarm: FC<EditProps> = ({ id, farmer }) => {
             valueOptions={field.valueOptions}
           />
         ))}
-        <button type={'submit'}>submit</button>
+        <button type={'submit'} style={{ display: 'none' }}>
+          submit
+        </button>
       </InputTextStyle>
       <Map width={800} height={400} center={center} zoom={15}>
         {({ TileLayer, Marker, Popup }) => (

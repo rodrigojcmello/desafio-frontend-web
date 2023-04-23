@@ -31,4 +31,13 @@ export const InputTextStyle = styled('header', {
     fontWeight: 500,
     display: 'block',
   },
+  '.input_radio__options': {
+    display: 'flex',
+    gap: 32,
+    marginTop: 10,
+    marginBottom: 9,
+    '& label': {
+      display: 'block',
+    },
+  },
 });

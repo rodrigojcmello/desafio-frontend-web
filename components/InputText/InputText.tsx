@@ -36,21 +36,23 @@ export const InputText: FC<InputTextProps> = ({
         <>
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <span className={'input_label'}>{label}</span>
-          {valueOptions.map((valueOption) => {
-            return (
-              <label htmlFor={valueOption.value} key={valueOption.value}>
-                <input
-                  type={type}
-                  className={'input_radio'}
-                  value={valueOption.value}
-                  id={valueOption.value}
-                  defaultChecked={`${defaultValue}` === valueOption.value}
-                  {...register(id)}
-                />
-                {valueOption.label}
-              </label>
-            );
-          })}
+          <span className={'input_radio__options'}>
+            {valueOptions.map((valueOption) => {
+              return (
+                <label htmlFor={valueOption.value} key={valueOption.value}>
+                  <input
+                    type={type}
+                    className={'input_radio'}
+                    value={valueOption.value}
+                    id={valueOption.value}
+                    defaultChecked={`${defaultValue}` === valueOption.value}
+                    {...register(id, validation)}
+                  />
+                  {valueOption.label}
+                </label>
+              );
+            })}
+          </span>
         </>
       ) : undefined}
       {error && <p className={'input__error'}>{error.message}</p>}
