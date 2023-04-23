@@ -17,17 +17,22 @@ const ViewFarm: FC<ViewProps> = ({ id, farmer }) => {
   const router = useRouter();
 
   const center: LatLngExpression = [
-    farmer.location.latitude,
-    farmer.location.longitude,
+    farmer?.location.latitude || 0,
+    farmer?.location.longitude || 0,
   ];
 
   const deleteFarm = async () => {
     // eslint-disable-next-line no-alert
     if (window.confirm('Tem certeza que deseja apagar esta fazenda?')) {
-      await deleteFarmByID(id);
-      // eslint-disable-next-line no-alert
-      alert('Fazenda deletada!');
-      await router.push('/');
+      try {
+        await deleteFarmByID(id);
+        // eslint-disable-next-line no-alert
+        alert('Fazenda deletada!');
+        await router.push('/');
+      } catch {
+        // eslint-disable-next-line no-alert
+        alert('Houve um erro ao deletar a fazenda');
+      }
     }
   };
 
@@ -67,7 +72,9 @@ const ViewFarm: FC<ViewProps> = ({ id, farmer }) => {
             )}
           </Map>
         </div>
-      ) : undefined}
+      ) : (
+        <div>Houve um erro na requisição</div>
+      )}
     </div>
   );
 };
@@ -76,12 +83,17 @@ export default ViewFarm;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.query;
-  const farmer = await getOneFarmByID(id as string);
+  try {
+    const farmer = await getOneFarmByID(id as string);
 
-  return {
-    props: {
-      id,
-      farmer,
-    },
-  };
+    return {
+      props: {
+        id,
+        farmer,
+      },
+    };
+  } catch {
+    // eslint-disable-next-line unicorn/no-null
+    return { props: { id, farmer: null } };
+  }
 };

@@ -111,12 +111,17 @@ const NewFarm: FC<EditProps> = ({ id, farmer }) => {
       type: data.type,
     };
 
-    await (isNew ? setNewFarm([payload]) : updateFarmByID(id!, payload));
+    try {
+      await (isNew ? setNewFarm([payload]) : updateFarmByID(id!, payload));
 
-    const alertMessage = isNew ? 'Fazenda cadastrada!' : 'Fazenda editada!';
-    // eslint-disable-next-line no-alert
-    alert(alertMessage);
-    await router.push('/');
+      const alertMessage = isNew ? 'Fazenda cadastrada!' : 'Fazenda editada!';
+      // eslint-disable-next-line no-alert
+      alert(alertMessage);
+      await router.push('/');
+    } catch {
+      // eslint-disable-next-line no-alert
+      alert(isNew ? 'Erro ao cadastrar fazenda!' : 'Erro ao editar fazenda!');
+    }
   };
 
   const title = isNew ? 'Nova Fazenda' : 'Editar Fazenda';

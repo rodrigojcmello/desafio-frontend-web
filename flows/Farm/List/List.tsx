@@ -15,7 +15,11 @@ const List: FC<HomeProps> = ({ checklist }) => {
         <title>{title}</title>
       </Head>
       <Header title={title} rightComponent={<NewButton />} />
-      <Item checklist={checklist} />
+      {checklist ? (
+        <Item checklist={checklist} />
+      ) : (
+        <div>Houve um erro na requisição</div>
+      )}
     </div>
   );
 };

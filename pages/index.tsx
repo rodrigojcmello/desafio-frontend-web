@@ -20,11 +20,16 @@ const Home: FC<HomeProps> = (props) => {
 export default Home;
 
 export const getServerSideProps = async () => {
-  const checklist = await getAllFarms();
+  try {
+    const checklist = await getAllFarms();
 
-  return {
-    props: {
-      checklist,
-    },
-  };
+    return {
+      props: {
+        checklist,
+      },
+    };
+  } catch {
+    // eslint-disable-next-line unicorn/no-null
+    return { props: { checklist: null } };
+  }
 };
