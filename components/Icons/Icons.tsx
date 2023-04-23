@@ -1,15 +1,9 @@
-export const BackIcon = () => (
-  <span className={'material-symbols-outlined'}>arrow_back</span>
+const MaterialSymbol = ({ symbol }: { symbol: string }) => (
+  <span className={'material-symbols-outlined'}>{symbol}</span>
 );
 
-export const DeleteIcon = () => (
-  <span className={'material-symbols-outlined'}>delete</span>
-);
-
-export const EditIcon = () => (
-  <span className={'material-symbols-outlined'}>edit</span>
-);
-
-export const SaveIcon = () => (
-  <span className={'material-symbols-outlined'}>save</span>
-);
+export const BackIcon = () => <MaterialSymbol symbol={'arrow_back'} />;
+export const DeleteIcon = () => <MaterialSymbol symbol={'delete'} />;
+export const EditIcon = () => <MaterialSymbol symbol={'edit'} />;
+export const SaveIcon = () => <MaterialSymbol symbol={'save'} />;
+export const AddIcon = () => <MaterialSymbol symbol={'add'} />;

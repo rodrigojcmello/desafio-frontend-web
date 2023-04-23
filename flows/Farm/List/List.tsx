@@ -2,16 +2,19 @@ import type { FC } from 'react';
 import type { HomeProps } from '@/flows/Farm/List/List.types';
 import moment from 'moment';
 import Link from 'next/link';
+import { Header } from '@/components/Header';
+import { NewButton } from '@/flows/Farm/New/components/NewButton';
+import Head from 'next/head';
 
 const List: FC<HomeProps> = ({ checklist }) => {
-  // console.log('checklist', checklist);
+  const title = 'Lista de Fazendas';
 
   return (
     <div>
-      <div>
-        <h1>Farmers</h1>
-        <Link href={`/farm/new`}>add farmer</Link>
-      </div>
+      <Head>
+        <title>{title}</title>
+      </Head>
+      <Header title={title} rightComponent={<NewButton />} />
 
       {checklist.map((farmer) => {
         return (

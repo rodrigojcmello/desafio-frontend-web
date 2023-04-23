@@ -1,1 +1,1 @@
-export { BackIcon, EditIcon, DeleteIcon, SaveIcon } from './Icons';
+export { BackIcon, EditIcon, DeleteIcon, SaveIcon, AddIcon } from './Icons';
