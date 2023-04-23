@@ -11,5 +11,6 @@ export const HeaderStyle = styled('header', {
     margin: 0,
     lineHeight: 1.5,
     color: '$blue500',
+    width: '100%',
   },
 });

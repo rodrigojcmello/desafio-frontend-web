@@ -13,7 +13,9 @@ export const { styled, css } = createStitches({
   },
   theme: {
     colors: {
+      white0: '#ffffff',
       black1000: '#000000',
+      green500: '#4caf50',
       blue500: '#2196f3',
     },
     transitions: {

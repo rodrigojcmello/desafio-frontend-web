@@ -8,6 +8,9 @@ import type { LatLngExpression } from 'leaflet';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Map } from '@/components/Map';
+import { Header } from '@/components/Header';
+import { BackButton } from '@/components/BackButton';
+import { EditButton } from '@/flows/Farm/New/components/EditButton';
 
 const ViewFarm: FC<ViewProps> = ({ id, farmer }) => {
   const router = useRouter();
@@ -28,6 +31,11 @@ const ViewFarm: FC<ViewProps> = ({ id, farmer }) => {
 
   return (
     <div>
+      <Header
+        title={'Detalhes da Fazenda'}
+        leftComponent={<BackButton />}
+        rightComponent={<EditButton id={id} />}
+      />
       <div>
         <h1>View farm</h1>
         {/* eslint-disable-next-line no-underscore-dangle */}
